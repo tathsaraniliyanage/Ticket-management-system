@@ -1,9 +1,12 @@
 package lk.ijse.gdse.ticketManagement.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.gdse.ticketManagement.dto.BusDTO;
+import org.apache.coyote.Request;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import lk.ijse.gdse.ticketManagement.service.BusService;
 import lombok.AllArgsConstructor;
@@ -24,9 +27,20 @@ public class BusController {
         return "hello world";
     }
 
-    @PostMapping
-    public String saveBus(){
-        return "bus saved";
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> saveBus(@RequestBody BusDTO busDTO , BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getFieldErrors().get(0).getDefaultMessage());
+        }
+
+        try {
+            busService.saveBus(busDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("bus saved successully !");
+        }catch(Exception exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("internal server error" + exception);
+        }
     }
+
 
 }

@@ -1,5 +1,6 @@
 package lk.ijse.gdse.ticketManagement.service;
 
+import lk.ijse.gdse.ticketManagement.dto.BusDTO;
 import lk.ijse.gdse.ticketManagement.repository.BusRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,4 +13,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class BusService {
     final private BusRepo busRepo;
+
+    public void saveBus(BusDTO busDTO) {
+    }
 }
