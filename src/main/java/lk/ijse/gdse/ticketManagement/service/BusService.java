@@ -16,4 +16,8 @@ public class BusService {
 
     public void saveBus(BusDTO busDTO) {
     }
+
+    public void updateBus(BusDTO busDTO) {
+
+    }
 }

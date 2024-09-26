@@ -43,4 +43,15 @@ public class BusController {
     }
 
 
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> updateBus(@RequestBody BusDTO busDTO , BindingResult bindingResult){
+        try{
+            busService.updateBus(busDTO);
+            return ResponseEntity.status(HttpStatus.OK).body("Bus updated successfully !");
+        }catch(Exception exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("bus not updated" + exception);
+        }
+
+    }
+
 }
