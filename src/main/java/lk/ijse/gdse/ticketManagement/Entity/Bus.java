@@ -1,8 +1,6 @@
 package lk.ijse.gdse.ticketManagement.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
 /**
  * @author Praboda Thathsarani
@@ -13,6 +11,7 @@ import org.springframework.data.annotation.Id;
 @Table(name = "Bus")
 public class Bus {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String regId;
     private String name;
     private String category;
