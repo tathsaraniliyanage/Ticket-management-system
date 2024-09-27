@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
  * @author Praboda Thathsarani
  * @Project ticketManagement
  */
+
 @Service
 @AllArgsConstructor
 public class BusService {
