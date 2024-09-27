@@ -21,4 +21,7 @@ public class BusService {
     public void updateBus(BusDTO busDTO) {
 
     }
+    public BusDTO getBus(String id){
+       return  new BusDTO();
+    }
 }
