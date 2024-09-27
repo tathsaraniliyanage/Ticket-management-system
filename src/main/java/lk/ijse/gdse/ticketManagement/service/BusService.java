@@ -24,4 +24,7 @@ public class BusService {
     public BusDTO getBus(String id){
        return  new BusDTO();
     }
+    public void deleteBus(String id){
+
+    }
 }

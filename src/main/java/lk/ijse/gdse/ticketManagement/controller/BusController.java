@@ -43,9 +43,13 @@ public class BusController {
         }
     }
 
-
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateBus(@RequestBody BusDTO busDTO, BindingResult bindingResult, @PathVariable ("id") String id) {
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bindingResult.getFieldErrors().get(0).getDefaultMessage());
+        }
+
         try {
             busService.updateBus(busDTO);
             return ResponseEntity.status(HttpStatus.OK).body("Bus updated successfully !");
@@ -55,9 +59,11 @@ public class BusController {
 
     }
 
-    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> deleteBus(@RequestBody BusDTO busDTO, BindingResult bindingResult) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value = "id", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> deleteBus(@PathVariable ("id") String id) {
         try {
+            busService.deleteBus(id);
             return ResponseEntity.status(HttpStatus.OK).body("bus deleted successfully");
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("bus not deleted" + exception);
